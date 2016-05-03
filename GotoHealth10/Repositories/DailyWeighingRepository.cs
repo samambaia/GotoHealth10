@@ -30,9 +30,14 @@ namespace GotoHealth10.Repositories
                 var jsonString = await FileIO.ReadTextAsync(file);
                 if (jsonString != string.Empty)
                 {
-                    var items = await Task.Factory.StartNew( () =>  JsonConvert.DeserializeObject<ObservableCollection<DailyWeighingModel>>(jsonString));
-                    return items;
+                    var items = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<ObservableCollection<DailyWeighingModel>>(jsonString));
+
+                    var order = items.OrderByDescending(a => a.Date);
+
+                    ObservableCollection<DailyWeighingModel> itemsDesc = new ObservableCollection<DailyWeighingModel>(order);
+                    return itemsDesc;
                 }
+
             }
             catch (Exception ex)
             {
@@ -42,7 +47,7 @@ namespace GotoHealth10.Repositories
             return new ObservableCollection<DailyWeighingModel>();
         }
 
-        public async Task<IEnumerable<DailyWeighingModel>> FindAllByUserNameAsync(int Id)
+        public async Task<IEnumerable<DailyWeighingModel>> FindAllByUserNameAsync(string Id)
         {
             var checks = await findAllAsync();
             var checksByUserName = checks.Where(s => s.Id == Id);
@@ -53,7 +58,7 @@ namespace GotoHealth10.Repositories
         public async Task<DailyWeighingModel> FindSelectedItem(string Date)
         {
             var checks = await findAllAsync();
-            var selectedItem = checks.Where(a => a.Date == Date);
+            var selectedItem = checks.Where(a => a.Date == DateTime.Parse(Date));
 
             return (DailyWeighingModel)selectedItem;
         }

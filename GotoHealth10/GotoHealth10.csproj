@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GotoHealth10</RootNamespace>
     <AssemblyName>GotoHealth10</AssemblyName>
-    <DefaultLanguage>en-US</DefaultLanguage>
+    <DefaultLanguage>pt-BR</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
@@ -100,6 +100,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UpDownWeightControl.xaml.cs">
+      <DependentUpon>UpDownWeightControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\DataPtBrConverter.cs" />
+    <Compile Include="Converters\LikeDislikeConverter.cs" />
+    <Compile Include="Converters\UpConverter.cs" />
+    <Compile Include="Converters\DownConverter.cs" />
     <Compile Include="Models\DailyWeighingModel.cs" />
     <Compile Include="Models\HistoricDailyWeighingModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -154,6 +161,10 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\UpDownWeightControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Custom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

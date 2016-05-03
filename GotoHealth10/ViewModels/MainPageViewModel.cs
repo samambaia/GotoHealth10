@@ -1,6 +1,8 @@
+using GotoHealth10.Models;
 using GotoHealth10.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Template10.Mvvm;
@@ -15,32 +17,63 @@ namespace GotoHealth10.ViewModels
         {
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {
-                Date = _DateDt[3];
+                Date = _DateDt;
                 Weight = _Weight;
+                UpDown = _UpDown;
+                Difference = _Difference;
             }
         }
 
         DailyWeighingRepository dailyRepository = new DailyWeighingRepository();
 
-        string[] _DateDt = DateTime.Now.GetDateTimeFormats('d');
 
-        string _Weight = "71.80";
+        string _Weight = "69.90";
         public string Weight { get { return _Weight; } set { Set(ref _Weight, value); } }
 
-        public string Date { get { return _DateDt[3]; } set { Set(ref _DateDt[3], value); } }
+        string _DateDt = DateTime.Today.Date.ToString("dd/MM/yyyy");
+        public string Date { get { return _DateDt; } set { Set(ref _DateDt, value); } }
+
+        string _Difference = "0.70";
+        public string Difference
+        {
+            get { return _Difference; }
+            set { Set(ref _Difference, value); }
+        }
+
+        string _UpDown = "0";
+        public string UpDown
+        {
+            get { return _UpDown; }
+            set { Set(ref _UpDown, value); }
+        }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            var lastCheck = await dailyRepository.LastCheck();
-            if (lastCheck != null)
+            var par = ((DailyWeighingModel)parameter);
+            if (par != null)
             {
-                Date = lastCheck.Date;
-                Weight = lastCheck.Weight;
+                Date = par.Date.ToString();
+                Weight = par.Weight;
+                UpDown = par.UpDown;
+                Difference = par.Difference;
             }
             else
             {
-                Date = _DateDt[3];
-                Weight = _Weight;
+                var lastCheck = await dailyRepository.LastCheck();
+                if (lastCheck != null)
+                {
+                    Date = lastCheck.Date.ToString();
+                    Weight = lastCheck.Weight;
+                    UpDown = lastCheck.UpDown;
+                    Difference = lastCheck.Difference;
+                }
+                else if (parameter != null)
+                {
+                    Date = _DateDt;
+                    Weight = _Weight;
+                    UpDown = _UpDown;
+                    Difference = _Difference;
+                }
             }
 
             await Task.CompletedTask;

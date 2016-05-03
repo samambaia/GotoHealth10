@@ -25,35 +25,38 @@ namespace GotoHealth10.ViewModels
         string _Weight;
         public string Weight
         {
-            get
-            {
-                return _Weight;
-            }
-            set
-            {
-                Set(ref _Weight, value);
-            }
+            get{ return _Weight; }
+            set{ Set(ref _Weight, value); }
         }
 
         string _Date;
         public string Date
         {
-            get
-            {
-                return _Date;
-            }
-            set
-            {
-                Set(ref _Date, value);
-            }
+            get{ return _Date; }
+            set{ Set(ref _Date, value); }
         }
+
+        string _Difference;
+        public string Difference
+        {
+            get { return _Difference; }
+            set { Set(ref _Difference, value); }
+        }
+
+        string _UpDown;
+        public string UpDown
+        {
+            get { return _UpDown; }
+            set { Set(ref _UpDown, value); }
+        }
+
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             var itemEdit = (DailyWeighingModel)parameter;
             if (itemEdit != null)
             {
-                Date = itemEdit.Date;
+                Date = itemEdit.Date.ToString();
                 Weight = itemEdit.Weight;
             }
             await Task.CompletedTask;
@@ -74,18 +77,49 @@ namespace GotoHealth10.ViewModels
         {
             await SaveWeight();
         }
+
         async Task SaveWeight()
         {
+            int id = 0;
+
+            var lastCheck = await dailyRepository.LastCheck();
+
+            if (lastCheck != null)
+            {
+                id = Convert.ToInt32(lastCheck.Id);
+            }
+
+            id++;
+
+            await LastCheck();
+
             var checkModel = new DailyWeighingModel()
             {
-                Id = 1,
-                Date = Date,
-                Weight = Weight
+                Id = id.ToString(),
+                Date = DateTime.Parse(Date),
+                Weight = Weight,
+                UpDown = UpDown,
+                Difference = Difference
             };
-
+            
             await dailyRepository.SaveAsync(checkModel);
 
             GotoDetailsPage();
+        }
+
+        private async Task LastCheck()
+        {
+            var lastCheck = await dailyRepository.LastCheck();
+
+            if (lastCheck != null)
+            {
+                double last = Double.Parse(lastCheck.Weight);
+                double current = double.Parse(Weight);
+
+                Difference = ((current - last) / 100).ToString();
+
+                UpDown = (double.Parse(Difference) < 0 ? "0" : "1");
+            }
         }
 
         private void GotoDetailsPage() =>

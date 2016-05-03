@@ -1,9 +1,14 @@
-﻿namespace GotoHealth10.Models
+﻿using System;
+using System.Globalization;
+
+namespace GotoHealth10.Models
 {
     public class DailyWeighingModel
     {
-        public int Id { get; set; }
-        public string Date { get; set; }
+        public string Id { get; set; }
+        public DateTime Date { get; set; }
         public string Weight { get; set; }
+        public string UpDown { get; set; }
+        public string Difference { get; set; }
     }
 }

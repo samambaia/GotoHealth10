@@ -1,0 +1,49 @@
+﻿<UserControl
+    x:Class="GotoHealth10.Controls.UpDownWeightControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GotoHealth10.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Converters="using:GotoHealth10.Converters"
+    xmlns:vm="using:GotoHealth10.ViewModels"
+    mc:Ignorable="d"
+    d:DesignHeight="200"
+    d:DesignWidth="100">
+
+    <UserControl.DataContext>
+        <vm:MainPageViewModel x:Name="MainPageViewModel"/>
+    </UserControl.DataContext>
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Converters:UpConverter x:Key="UpConverter"/>
+            <Converters:DownConverter x:Key="DownConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Path Data="M47.1647,1.48372 L48.1647,1.48372 L48.1647,200.484 L47.1647,200.484 z M47.664,0.5 L95.1674,48.0034 L47.6637,0.503728 L0.5,47.664 z" 
+                  Fill="{StaticResource AppBarBackgroundThemeBrush}" 
+                  Height="100" 
+                  Stretch="Fill" 
+                  Stroke="{StaticResource AppBarBackgroundThemeBrush}" 
+                  UseLayoutRounding="False" 
+                  Width="50" RequestedTheme="Default" 
+                  Visibility="{Binding UpDown, Converter={StaticResource UpConverter}}"/>
+            <Path Data="M47.1647,1.48372 L48.1647,1.48372 L48.1647,200.484 L47.1647,200.484 z M47.664,0.5 L95.1674,48.0034 L47.6637,0.503728 L0.5,47.664 z" 
+                  Fill="{StaticResource AppBarBackgroundThemeBrush}" 
+                  Height="100" 
+                  Stretch="Fill" 
+                  Stroke="{StaticResource AppBarBackgroundThemeBrush}" 
+                  UseLayoutRounding="False" 
+                  Width="50" RequestedTheme="Default" 
+                  Visibility="{Binding UpDown, Converter={StaticResource DownConverter}}" RenderTransformOrigin="0.5,0.5">
+                <Path.RenderTransform>
+                    <CompositeTransform Rotation="-180"/>
+                </Path.RenderTransform>
+            </Path>
+        </StackPanel>
+    </Grid>
+</UserControl>

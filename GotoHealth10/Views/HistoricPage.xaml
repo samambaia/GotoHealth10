@@ -5,6 +5,7 @@
       xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
       xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:controls="using:Template10.Controls"
+      xmlns:Converters="using:GotoHealth10.Converters"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:GotoHealth10.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -14,6 +15,19 @@
     <Page.DataContext>
         <vm:HistoricPageViewModel x:Name="ViewModel" />
     </Page.DataContext>
+
+    <Page.Resources>
+        <Converters:DataPtBrConverter x:Key="DataPtBrConverter"/>
+
+        <!--<Style x:Key="ZebraListViewStyle" TargetType="ListViewItem">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <Binding RelativeSource="{RelativeSource Self}" 
+                                             Converter="{StaticResource ZebraListViewConverter}"/>
+                </Setter.Value>
+            </Setter>
+        </Style>-->
+    </Page.Resources>
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -59,25 +73,31 @@
                       RelativePanel.Below="pageHeader"
                       VerticalScrollBarVisibility="Auto">
             <StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Style="{ThemeResource HeaderTextBlockStyle}" Text="Date" Margin="10,0,0,0"/>
-                    <TextBlock Style="{ThemeResource HeaderTextBlockStyle}" Text="Weight" Margin="70,0,0,0"/>
-                </StackPanel>
                 <ListView x:Name="lstSamamba" 
                           ItemsSource="{Binding Markings}" 
                           IsItemClickEnabled="True"
                           SelectedItem = "{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" 
-                                    Text="{Binding Date}"
-                                    x:Name="Date"/>
-                                <TextBlock Style="{StaticResource SubheaderTextBlockStyle}"
-                                    Text="{Binding Weight}" 
-                                    Margin="50,0,0,0"
-                                    x:Name="Weight"/>
-                            </StackPanel>
+                    <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0">
+                                    <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" 
+                                               Text="{Binding Date, Converter={StaticResource DataPtBrConverter}}"
+                                               x:Name="Date"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right">
+                                    <TextBlock Style="{StaticResource SubtitleTextBlockStyle}"
+                                               Text="{Binding Weight}" 
+                                               x:Name="Weight"/>
+                                </StackPanel>
+                            </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

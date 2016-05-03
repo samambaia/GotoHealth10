@@ -5,6 +5,8 @@
       xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
       xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:controls="using:Template10.Controls"
+      xmlns:Converters="using:GotoHealth10.Converters"
+      xmlns:MyControls="using:GotoHealth10.Controls"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:GotoHealth10.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -13,6 +15,11 @@
     <Page.DataContext>
         <vm:MainPageViewModel x:Name="ViewModel" />
     </Page.DataContext>
+
+    <Page.Resources>
+        <Converters:DataPtBrConverter x:Key="DataPtBrConverter"/>
+        <Converters:LikeDislikeConverter x:Key="LikeDislikeConverter"/>
+    </Page.Resources>
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -64,28 +71,87 @@
                       RelativePanel.Below="pageHeader"
                       VerticalScrollBarVisibility="Auto">
 
-            <StackPanel 
-                Orientation="Vertical" 
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                Width="Auto">
-                <TextBlock
-                    Text="Date" 
-                    Style="{StaticResource SubheaderTextBlockStyle}"
-                    VerticalAlignment="Bottom"/>
-                <TextBlock
-                    Text="{Binding Date}"
-                    Style="{StaticResource HeaderTextBlockStyle}"
-                    VerticalAlignment="Bottom"/>
-                <TextBlock
-                    Margin="0,20,0,0"
-                    Text="Weight" 
-                    Style="{StaticResource SubheaderTextBlockStyle}"/>
-                <TextBlock
-                    Text="{Binding Weight}"
-                    Style="{StaticResource HeaderTextBlockStyle}"
-                    VerticalAlignment="Bottom"/>
-            </StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Column="0" Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Column="0" Grid.Row="0"
+                            Orientation="Vertical"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                        <TextBlock Text="Name" Style="{StaticResource CaptionTextBlockStyle}"/>
+                        <TextBlock Text="Samambaia Junior" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Grid.Row="0"
+                            Orientation="Vertical"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                        <TextBlock Text="Age" Style="{StaticResource CaptionTextBlockStyle}"/>
+                        <TextBlock Text="46" Style="{StaticResource SubheaderTextBlockStyle}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Grid.Row="0"
+                            Orientation="Vertical"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                        <TextBlock Text="Target" Style="{StaticResource CaptionTextBlockStyle}"/>
+                        <TextBlock Text="68.7" Style="{StaticResource SubheaderTextBlockStyle}"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="0" Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="250"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Column="0" Grid.Row="0"
+                            Orientation="Vertical" 
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Width="Auto">
+                        <TextBlock
+                            Text="{Binding Weight}"
+                            FontFamily="Yu Gothic"
+                            FontSize="100"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Grid.Row="0"
+                            Orientation="Vertical"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                        <SymbolIcon 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center" 
+                            Height="Auto" 
+                            Width="Auto" 
+                            Symbol="{Binding UpDown, Converter={StaticResource LikeDislikeConverter}}" />
+                        <TextBlock Text="{Binding Difference}" 
+                                   Margin="0,20,0,0" 
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+
+                </Grid>
+                
+            </Grid>
 
         </ScrollViewer>
 

@@ -1,5 +1,6 @@
 using GotoHealth10.Models;
 using GotoHealth10.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -19,20 +20,20 @@ namespace GotoHealth10.ViewModels
                 {
                     new DailyWeighingModel()
                     {
-                        Id = 1,
-                        Date = "01/04/2016",
+                        Id = "1",
+                        Date = new DateTime(2016, 4, 25),
                         Weight = "72.0"
                     },
                     new DailyWeighingModel()
                     {
-                        Id = 1,
-                        Date = "02/04/2016",
+                        Id = "2",
+                        Date = new DateTime(2016, 4, 26),
                         Weight = "71.2"
                     },
                     new DailyWeighingModel()
                     {
-                        Id = 1,
-                        Date = "03/04/2016",
+                        Id = "3",
+                        Date = new DateTime(2016, 4, 27),
                         Weight = "60.0"
                     }
                 };
@@ -48,6 +49,8 @@ namespace GotoHealth10.ViewModels
             set
             {
                 Set(ref _selectedItem, value);
+
+                GotoMainPage();
             }
         }
 
@@ -107,8 +110,12 @@ namespace GotoHealth10.ViewModels
             return result;
         }
 
-        private void GotoAddWeightPage() =>
-            NavigationService.Navigate(typeof(Views.AddWeightPage), _selectedItem);
+        //private void GotoAddWeightPage() =>
+        //    NavigationService.Navigate(typeof(Views.AddWeightPage), null);
+
+        private void GotoMainPage() =>
+            NavigationService.Navigate(typeof(Views.MainPage), _selectedItem);
+
     }
 }
 
