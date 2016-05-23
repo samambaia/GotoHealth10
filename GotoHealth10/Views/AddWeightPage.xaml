@@ -61,30 +61,35 @@
 
             <StackPanel Orientation="Vertical" 
                     VerticalAlignment="Center"
-                    Width="150">
-                <TextBlock
-                    Margin="0,20,0,10"
-                    Text="Date" Style="{StaticResource HeaderTextBlockStyle}" FontFamily="Yu Gothic"/>
+                    Width="180">
                 <TextBox 
                     Text="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                    Language="pt-BR"
-                    FontSize="20" BorderBrush="{ThemeResource TextBoxBorderThemeBrush}" Background="{ThemeResource TextBoxBackgroundThemeBrush}" Foreground="{ThemeResource TextBoxForegroundThemeBrush}"/>
-                <TextBlock
-                    Margin="0,20,0,10"
-                    Text="Weight" Style="{StaticResource HeaderTextBlockStyle}"/>
+                    PlaceholderText="Date"
+                    FontFamily="Yu Gothic"
+                    FontSize="20"
+                    Language="pt-BR"/>
                 <TextBox                     
                     Text="{Binding Weight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                    RelativePanel.AlignHorizontalCenterWithPanel="True" 
-                    RelativePanel.AlignVerticalCenterWithPanel="True" 
-                    x:Name="txtWeight" FontSize="20" BorderBrush="{ThemeResource TextBoxBorderThemeBrush}" Foreground="{ThemeResource TextBoxForegroundThemeBrush}" Background="{ThemeResource TextBoxBackgroundThemeBrush}"/>
+                    Margin="0,20"
+                    InputScope="Digits"
+                    PlaceholderText="Weight"
+                    FontFamily="Yu Gothic" 
+                    FontSize="35" 
+                    TextAlignment="Center"/>
                 <Button x:Name="addButton"
                     Click="{x:Bind ViewModel.AddWeight}" 
                     HorizontalAlignment="Stretch" 
                     VerticalAlignment="Stretch" 
                     Margin="20,20,20,20" 
                     Content="Add"
-                    RelativePanel.AlignVerticalCenterWithPanel="True" 
-                    RelativePanel.AlignHorizontalCenterWithPanel="True" FontFamily="Yu Gothic" FontSize="20" Height="52" BorderBrush="{ThemeResource ButtonBorderThemeBrush}" Background="{ThemeResource ButtonBackgroundThemeBrush}" Padding="10,10,10,4" UseLayoutRounding="True" Foreground="{ThemeResource ButtonForegroundThemeBrush}">
+                    FontFamily="Yu Gothic" 
+                    FontSize="20" 
+                    Height="52" 
+                    BorderBrush="{ThemeResource ButtonBorderThemeBrush}" 
+                    Background="{ThemeResource ButtonBackgroundThemeBrush}" 
+                    Padding="10,10,10,4" 
+                    UseLayoutRounding="True" 
+                    Foreground="{ThemeResource ButtonForegroundThemeBrush}">
                 </Button>
             </StackPanel>
         </ScrollViewer>

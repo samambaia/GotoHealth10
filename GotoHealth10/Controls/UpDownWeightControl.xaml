@@ -17,7 +17,7 @@
     
     <UserControl.Resources>
         <ResourceDictionary>
-            <Converters:UpConverter x:Key="UpConverter"/>
+            <Converters:WeightConverter x:Key="UpConverter"/>
             <Converters:DownConverter x:Key="DownConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>

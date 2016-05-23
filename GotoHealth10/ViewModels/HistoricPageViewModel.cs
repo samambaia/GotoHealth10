@@ -16,23 +16,23 @@ namespace GotoHealth10.ViewModels
         {
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {
-                var dwm = new ObservableCollection<DailyWeighingModel>()
+                var dwm = new ObservableCollection<WeighingModel>()
                 {
-                    new DailyWeighingModel()
+                    new WeighingModel()
                     {
-                        Id = "1",
+                        Id = 1,
                         Date = new DateTime(2016, 4, 25),
                         Weight = "72.0"
                     },
-                    new DailyWeighingModel()
+                    new WeighingModel()
                     {
-                        Id = "2",
+                        Id = 2,
                         Date = new DateTime(2016, 4, 26),
                         Weight = "71.2"
                     },
-                    new DailyWeighingModel()
+                    new WeighingModel()
                     {
-                        Id = "3",
+                        Id = 3,
                         Date = new DateTime(2016, 4, 27),
                         Weight = "60.0"
                     }
@@ -42,8 +42,8 @@ namespace GotoHealth10.ViewModels
             }
         }
 
-        DailyWeighingModel _selectedItem;
-        public DailyWeighingModel SelectedItem
+        WeighingModel _selectedItem;
+        public WeighingModel SelectedItem
         {
             get { return _selectedItem; }
             set
@@ -54,8 +54,8 @@ namespace GotoHealth10.ViewModels
             }
         }
 
-        private static ObservableCollection<DailyWeighingModel> _markings;
-        public ObservableCollection<DailyWeighingModel> Markings
+        ObservableCollection<WeighingModel> _markings;
+        public ObservableCollection<WeighingModel> Markings
         {
             get
             {
@@ -67,16 +67,11 @@ namespace GotoHealth10.ViewModels
             }
         }
 
-        //public async Task Delete()
-        //{
-        //    await _dailyRepository.DeleteSelectedItem(_selectedItem);
-        //}
-
-        Task<DailyWeighingModel> LoadItem(string Date)
+        Task<WeighingModel> LoadItem(int Id)
         {
-            DailyWeighingRepository _dailyRepository = new DailyWeighingRepository();
+            WeighingRepository _dailyRepository = new WeighingRepository();
 
-            var result = _dailyRepository.FindSelectedItem(Date);
+            var result = _dailyRepository.FindSelectedItemAsync(Id);
             return result;
         }
 
@@ -102,18 +97,15 @@ namespace GotoHealth10.ViewModels
             await Task.CompletedTask;
         }
 
-        Task<ObservableCollection<DailyWeighingModel>> Load()
+        Task<ObservableCollection<WeighingModel>> Load()
         {
-            DailyWeighingRepository _dailyRepository = new DailyWeighingRepository();
+            WeighingRepository _dailyRepository = new WeighingRepository();
 
-            var result = _dailyRepository.LoadAsync();
+            var result = _dailyRepository.LoadWeighingAsync(10);
             return result;
         }
 
-        //private void GotoAddWeightPage() =>
-        //    NavigationService.Navigate(typeof(Views.AddWeightPage), null);
-
-        private void GotoMainPage() =>
+        void GotoMainPage() =>
             NavigationService.Navigate(typeof(Views.MainPage), _selectedItem);
 
     }

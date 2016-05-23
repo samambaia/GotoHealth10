@@ -15,12 +15,12 @@ namespace GotoHealth10.ViewModels
         public AddWeightPageViewModel()
         {
             Date = _DateDt[0];
-            Weight = "70.00";
         }
 
         string[] _DateDt = DateTime.Now.GetDateTimeFormats('d', CultureInfo.CurrentCulture);
 
-        DailyWeighingRepository dailyRepository = new DailyWeighingRepository();
+        WeighingRepository dailyRepository = new WeighingRepository();
+        UserRepository userRepository = new UserRepository();
 
         string _Weight;
         public string Weight
@@ -50,15 +50,42 @@ namespace GotoHealth10.ViewModels
             set { Set(ref _UpDown, value); }
         }
 
+        #region IMC Calc
+
+        string _Height;
+        public string Height
+        {
+            get { return _Height; }
+            set { Set(ref _Height, value); }
+        }
+
+        string _IMC;
+        public string IMC
+        {
+            get { return _IMC; }
+            set { Set(ref _IMC, value); }
+        }
+
+        #endregion
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            var itemEdit = (DailyWeighingModel)parameter;
-            if (itemEdit != null)
+            var paramUser = (UserModel)parameter;
+
+            if (paramUser != null)
             {
-                Date = itemEdit.Date.ToString();
-                Weight = itemEdit.Weight;
+                Height = paramUser.Height;
+                Weight = paramUser.InitialWeigth;
             }
+            else
+            {
+                var existUser = userRepository.FindUser();
+                if (existUser != null)
+                {
+                    Height = existUser.Height;
+                }
+            }
+
             await Task.CompletedTask;
         }
 
@@ -80,51 +107,77 @@ namespace GotoHealth10.ViewModels
 
         async Task SaveWeight()
         {
+            IMC = await CalcIMCAsync(Height, Weight);
+
             int id = 0;
 
-            var lastCheck = await dailyRepository.LastCheck();
+            var lastCheck = await dailyRepository.LastCheckAsync();
 
             if (lastCheck != null)
             {
                 id = Convert.ToInt32(lastCheck.Id);
+
+                double last = double.Parse(lastCheck.Weight);
+                double current = double.Parse(Weight);
+                double dif = current - last;
+
+                dif = Math.Round(dif, 2);
+
+                if (dif.ToString().Length >= 3)
+                {
+                    if (dif >= 0)
+                    {
+                        Difference = dif.ToString().Substring(0, 3);
+                    }
+                    else
+                    {
+                        Difference = dif.ToString().Substring(0, 4);
+                    }
+                }
+                else
+                {
+                    Difference = dif.ToString();
+                }
+
+                UpDown = dif < 0 ? "0" : "1";
+            }
+            else
+            {
+                UpDown = "0";
+                Difference = "0";
             }
 
-            id++;
-
-            await LastCheck();
-
-            var checkModel = new DailyWeighingModel()
+            var checkModel = new WeighingModel()
             {
-                Id = id.ToString(),
                 Date = DateTime.Parse(Date),
                 Weight = Weight,
                 UpDown = UpDown,
-                Difference = Difference
+                Difference = Difference,
+                IMC = IMC
             };
             
-            await dailyRepository.SaveAsync(checkModel);
+            await dailyRepository.SaveWeighingAsync(checkModel);
 
             GotoDetailsPage();
         }
-
-        private async Task LastCheck()
+        
+        async Task<string> CalcIMCAsync(string height, string weight)
         {
-            var lastCheck = await dailyRepository.LastCheck();
-
-            if (lastCheck != null)
-            {
-                double last = Double.Parse(lastCheck.Weight);
-                double current = double.Parse(Weight);
-
-                Difference = ((current - last) / 100).ToString();
-
-                UpDown = (double.Parse(Difference) < 0 ? "0" : "1");
-            }
+            return await Task.Run(() => CalcIMC(height, weight));
         }
 
-        private void GotoDetailsPage() =>
-            NavigationService.Navigate(typeof(Views.HistoricPage), null);
+        string CalcIMC(string height, string weight)
+        {
+            double _height = double.Parse(height);
+            double _weight = double.Parse(weight);
+            double _heightPow = Math.Pow(_height, 2);
+            var imc = _weight / _heightPow;
 
+            return imc.ToString("N2");
+        }
+
+        void GotoDetailsPage() =>
+            NavigationService.Navigate(typeof(Views.MainPage), null);
     }
 }
 

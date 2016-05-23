@@ -14,11 +14,11 @@ namespace GotoHealth10.Converters
         {
             if (value != null)
             {
-                var like = value.ToString() == "0" ? Symbol.Like : Symbol.Dislike;
-                return like;
+                var imgPath = value.ToString() == "0" ? "ms-appx:///Assets/like_Light.png" : "ms-appx:///Assets/dislike_Light.png";
+                return imgPath;
             }
             else
-                return Symbol.Play;
+                return "\\Assets\\like_Light.png";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

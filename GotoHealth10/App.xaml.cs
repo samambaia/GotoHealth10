@@ -1,11 +1,10 @@
-using Windows.UI.Xaml;
-using System.Threading.Tasks;
+using GotoHealth10.Models;
 using GotoHealth10.Services.SettingsServices;
-using Windows.ApplicationModel.Activation;
+using Microsoft.Data.Entity;
+using System.Threading.Tasks;
 using Template10.Controls;
-using Template10.Common;
-using System;
-using System.Linq;
+using Windows.ApplicationModel.Activation;
+using Windows.UI.Xaml;
 
 namespace GotoHealth10
 {
@@ -18,6 +17,13 @@ namespace GotoHealth10
         {
             InitializeComponent();
             SplashFactory = (e) => new Views.Splash(e);
+
+            using (var db = new Context())
+            {
+                //db.Database.EnsureDeleted();
+                //db.Database.EnsureCreated();
+                db.Database.Migrate();
+            }
 
             #region App settings
 

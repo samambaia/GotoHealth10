@@ -17,7 +17,7 @@ namespace GotoHealth10.Converters
             }
 
             var dataPtBr = value.ToString();
-            dataPtBr = dataPtBr.Substring(0, 10);
+            dataPtBr = dataPtBr.Substring(0, 5);
 
             return dataPtBr;
         }

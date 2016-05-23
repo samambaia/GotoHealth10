@@ -6,11 +6,14 @@
       xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:controls="using:Template10.Controls"
       xmlns:Converters="using:GotoHealth10.Converters"
-      xmlns:MyControls="using:GotoHealth10.Controls"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:GotoHealth10.Views"
+      xmlns:charting="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
+      xmlns:Series="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
+      xmlns:datavis="using:WinRTXamlToolkit.Controls.DataVisualization"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:vm="using:GotoHealth10.ViewModels" mc:Ignorable="d">
+      xmlns:vm="using:GotoHealth10.ViewModels" mc:Ignorable="d" 
+      RequestedTheme="Default">
 
     <Page.DataContext>
         <vm:MainPageViewModel x:Name="ViewModel" />
@@ -19,6 +22,8 @@
     <Page.Resources>
         <Converters:DataPtBrConverter x:Key="DataPtBrConverter"/>
         <Converters:LikeDislikeConverter x:Key="LikeDislikeConverter"/>
+        <Converters:WeightConverter x:Key="WeightConverter"/>
+        <Converters:IMCConverter x:Key="IMCConverter"/>
     </Page.Resources>
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -54,7 +59,7 @@
 
         <controls:PageHeader x:Name="pageHeader" RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"
-                             RelativePanel.AlignTopWithPanel="True" Text="Main Page">
+                             RelativePanel.AlignTopWithPanel="True" Text="Home">
 
             <!--  secondary commands  -->
             <controls:PageHeader.SecondaryCommands>
@@ -77,13 +82,13 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="200"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Column="0" Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
+                        <ColumnDefinition Width="200"/>
                         <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
@@ -95,21 +100,21 @@
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center">
                         <TextBlock Text="Name" Style="{StaticResource CaptionTextBlockStyle}"/>
-                        <TextBlock Text="Samambaia Junior" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                        <TextBlock Text="{Binding NickName}" Style="{StaticResource TitleTextBlockStyle}"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Grid.Row="0"
                             Orientation="Vertical"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center">
                         <TextBlock Text="Age" Style="{StaticResource CaptionTextBlockStyle}"/>
-                        <TextBlock Text="46" Style="{StaticResource SubheaderTextBlockStyle}"/>
+                        <TextBlock Text="{Binding Age}" Style="{StaticResource TitleTextBlockStyle}"/>
                     </StackPanel>
                     <StackPanel Grid.Column="2" Grid.Row="0"
                             Orientation="Vertical"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center">
                         <TextBlock Text="Target" Style="{StaticResource CaptionTextBlockStyle}"/>
-                        <TextBlock Text="68.7" Style="{StaticResource SubheaderTextBlockStyle}"/>
+                        <TextBlock Text="{Binding TargetWeight}" Style="{StaticResource TitleTextBlockStyle}"/>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Column="0" Grid.Row="1">
@@ -118,7 +123,7 @@
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="250"/>
+                        <RowDefinition Height="200"/>
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Column="0" Grid.Row="0"
@@ -129,27 +134,64 @@
                         <TextBlock
                             Text="{Binding Weight}"
                             FontFamily="Yu Gothic"
-                            FontSize="100"
+                            FontSize="85"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                        <TextBlock
+                            Text="{Binding Imc, Converter={StaticResource IMCConverter}}"
+                            FontFamily="Yu Gothic"
+                            FontSize="14"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Grid.Row="0"
+                            Margin="0,55"
                             Orientation="Vertical"
-                            VerticalAlignment="Center"
+                            VerticalAlignment="Top"
                             HorizontalAlignment="Center">
-                        <SymbolIcon 
-                            HorizontalAlignment="Center" 
-                            VerticalAlignment="Center" 
-                            Height="Auto" 
-                            Width="Auto" 
-                            Symbol="{Binding UpDown, Converter={StaticResource LikeDislikeConverter}}" />
+                        <Image 
+                            Source="{Binding UpDown, Converter={StaticResource LikeDislikeConverter}}" 
+                            Stretch="UniformToFill" 
+                            Canvas.ZIndex="-2" 
+                            Width="50" 
+                            Height="50"/>
                         <TextBlock Text="{Binding Difference}" 
-                                   Margin="0,20,0,0" 
+                                   Margin="0,15,0,0" 
                                    HorizontalAlignment="Center"/>
                     </StackPanel>
 
                 </Grid>
+                <StackPanel Grid.Column="0" Grid.Row="2">
+                    <charting:Chart
+                        Height="Auto"
+                        Width="Auto"
+                        x:Name="LineChart" 
+                        LegendTitle="Weight"
+                        Margin="0,0">
+                        <charting:LineSeries ItemsSource="{Binding Chart}" 
+                                             IndependentValueBinding="{Binding Date, Converter={StaticResource DataPtBrConverter}}"
+                                             DependentValueBinding="{Binding Weight, Converter={StaticResource WeightConverter}}" 
+                                             IsSelectionEnabled="True" 
+                                             FontSize="12" FontFamily="Yu Gothic">
+                            <charting:LineSeries.DataPointStyle>
+                                <Style TargetType="charting:LineDataPoint">
+                                    <Setter Property="Background" Value="WhiteSmoke"/>
+                                </Style>
+                            </charting:LineSeries.DataPointStyle>
+                            <charting:LineSeries.LegendItemStyle>
+                                <Style TargetType="charting:LegendItem">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+                            </charting:LineSeries.LegendItemStyle>
+                        </charting:LineSeries>
+                        <charting:Chart.Axes>
+                            <charting:CategoryAxis Orientation="X" 
+                                                   Location="Bottom" 
+                                                   ShowGridLines="True" FontSize="12" FontFamily="Yu Gothic"/>
+                        </charting:Chart.Axes>
+                    </charting:Chart>
+                </StackPanel>
                 
             </Grid>
 

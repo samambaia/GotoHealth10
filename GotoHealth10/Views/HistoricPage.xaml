@@ -18,15 +18,6 @@
 
     <Page.Resources>
         <Converters:DataPtBrConverter x:Key="DataPtBrConverter"/>
-
-        <!--<Style x:Key="ZebraListViewStyle" TargetType="ListViewItem">
-            <Setter Property="Background">
-                <Setter.Value>
-                    <Binding RelativeSource="{RelativeSource Self}" 
-                                             Converter="{StaticResource ZebraListViewConverter}"/>
-                </Setter.Value>
-            </Setter>
-        </Style>-->
     </Page.Resources>
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -73,7 +64,7 @@
                       RelativePanel.Below="pageHeader"
                       VerticalScrollBarVisibility="Auto">
             <StackPanel>
-                <ListView x:Name="lstSamamba" 
+                <ListView x:Name="lstCheck" 
                           ItemsSource="{Binding Markings}" 
                           IsItemClickEnabled="True"
                           SelectedItem = "{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
@@ -92,7 +83,7 @@
                                                Text="{Binding Date, Converter={StaticResource DataPtBrConverter}}"
                                                x:Name="Date"/>
                                 </StackPanel>
-                                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right">
+                                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center">
                                     <TextBlock Style="{StaticResource SubtitleTextBlockStyle}"
                                                Text="{Binding Weight}" 
                                                x:Name="Weight"/>

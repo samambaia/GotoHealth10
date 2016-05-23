@@ -45,6 +45,16 @@
                                Text="Historic Weighing" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
+            <Controls:HamburgerButtonInfo 
+                ClearHistory="True" 
+                PageType="views:UserPage">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48" Height="48"
+                                Symbol="Contact" />
+                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center"
+                               Text="Profile" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
         </Controls:HamburgerMenu.PrimaryButtons>
 
         <Controls:HamburgerMenu.SecondaryButtons>
