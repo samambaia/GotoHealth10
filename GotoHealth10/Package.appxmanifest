@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="b2ea8efe-2c57-4a23-989f-725d00c1ea21" Publisher="CN=jribamar" Version="1.0.0.0" />
+  <Identity Name="b2ea8efe-2c57-4a23-989f-725d00c1ea21" Publisher="CN=jribamar" Version="1.0.5.0" />
   <mp:PhoneIdentity PhoneProductId="b2ea8efe-2c57-4a23-989f-725d00c1ea21" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>GotoHealth10</DisplayName>
-    <PublisherDisplayName>jribamar</PublisherDisplayName>
-    <Logo>Assets\Universal\Storelogo.png</Logo>
+    <DisplayName>GotoHealth</DisplayName>
+    <PublisherDisplayName>Samambaia Jr.</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
     <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
@@ -15,16 +15,16 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="GotoHealth10.App">
-      <uap:VisualElements DisplayName="GotoHealth" Square150x150Logo="Assets\Universal\Square150.png" Square44x44Logo="Assets\Universal\Square44.png" Description="Sample" BackgroundColor="transparent">
+      <uap:VisualElements DisplayName="GotoHealth" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="App to control daily weight and observe the evolution (or not) in chart and list." BackgroundColor="transparent">
         <uap:LockScreen Notification="badgeAndTileText" BadgeLogo="Assets\BadgeLogo.png" />
-        <uap:DefaultTile Wide310x150Logo="Assets\Universal\WideLogo150.png" Square310x310Logo="Assets\Universal\Square310.png">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\Square310x310Logo.png" Square71x71Logo="Assets\Square71x71Logo.png">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo" />
             <uap:ShowOn Tile="wide310x150Logo" />
             <uap:ShowOn Tile="square310x310Logo" />
           </uap:ShowNameOnTiles>
         </uap:DefaultTile>
-        <uap:SplashScreen Image="Assets\Universal\SplashScreen.png" />
+        <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
     </Application>
   </Applications>

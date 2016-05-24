@@ -33,6 +33,9 @@ namespace GotoHealth10
             ShowShellBackButton = _settings.UseShellBackButton;
 
             #endregion
+
+            Microsoft.HockeyApp.HockeyClient.Current.Configure("4bc0f0ec461f4cd8b2cbda32a42002aa");
+
         }
 
         public override async Task OnInitializeAsync(IActivatedEventArgs args)

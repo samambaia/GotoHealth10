@@ -147,7 +147,7 @@ namespace GotoHealth10.ViewModels
                 Difference = "0";
             }
 
-            var checkModel = new WeighingModel()
+            var checkModel = new WeighingModel
             {
                 Date = DateTime.Parse(Date),
                 Weight = Weight,
