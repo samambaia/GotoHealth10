@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="b2ea8efe-2c57-4a23-989f-725d00c1ea21" Publisher="CN=jribamar" Version="1.0.5.0" />
+  <Identity Name="33482Weft.GotoHealth10" Publisher="CN=3CB5D7C8-0128-47A0-BDCA-E11CED3BD9CD" Version="1.1.3.0" />
   <mp:PhoneIdentity PhoneProductId="b2ea8efe-2c57-4a23-989f-725d00c1ea21" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>GotoHealth</DisplayName>
-    <PublisherDisplayName>Samambaia Jr.</PublisherDisplayName>
+    <DisplayName>GotoHealth10</DisplayName>
+    <PublisherDisplayName>2JK TI</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>

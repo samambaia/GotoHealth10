@@ -16,8 +16,7 @@ namespace GotoHealth10.Converters
                 return string.Empty;
             }
 
-            var dataPtBr = value.ToString();
-            dataPtBr = dataPtBr.Substring(0, 5);
+            var dataPtBr = ((DateTime)value).Day.ToString().PadLeft(2, 'O') + "/" + ((DateTime)value).Month.ToString().PadLeft(2, '0');
 
             return dataPtBr;
         }

@@ -52,10 +52,10 @@
         </VisualStateManager.VisualStateGroups>
 
         <!--  header  -->
-        <controls:PageHeader x:Name="pageHeader" Frame="{x:Bind Frame}"
+        <controls:PageHeader x:Uid="PageHeader_Historic" x:Name="pageHeader" Frame="{x:Bind Frame}"
                              RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"
-                             RelativePanel.AlignTopWithPanel="True" Text="Historic Weighing" />
+                             RelativePanel.AlignTopWithPanel="True" Text="" />
 
         <!--  content  -->
         <ScrollViewer Padding="12,8,12,8" RelativePanel.AlignBottomWithPanel="True"

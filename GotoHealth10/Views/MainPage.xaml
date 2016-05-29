@@ -63,9 +63,8 @@
 
             <!--  secondary commands  -->
             <controls:PageHeader.SecondaryCommands>
-                <AppBarButton Click="{x:Bind ViewModel.GotoSettings}" Label="Settings" />
-                <AppBarButton Click="{x:Bind ViewModel.GotoPrivacy}" Label="Privacy" />
-                <AppBarButton Click="{x:Bind ViewModel.GotoAbout}" Label="About" />
+                <AppBarButton Click="{x:Bind ViewModel.GotoSettings}" Label="" x:Uid="AppBarButton_Settings" />
+                <AppBarButton Click="{x:Bind ViewModel.GotoAbout}" Label="" x:Uid="AppBarButton_About" />
             </controls:PageHeader.SecondaryCommands>
 
         </controls:PageHeader>
@@ -99,21 +98,28 @@
                             Orientation="Vertical"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center">
-                        <TextBlock Text="Name" Style="{StaticResource CaptionTextBlockStyle}"/>
-                        <TextBlock Text="{Binding NickName}" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <TextBlock x:Uid="NickName_TextBlock" 
+                                   Text="" 
+                                   Style="{StaticResource CaptionTextBlockStyle}"/>
+                        <TextBlock Text="{Binding NickName}" 
+                                   Style="{StaticResource TitleTextBlockStyle}"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Grid.Row="0"
                             Orientation="Vertical"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center">
-                        <TextBlock Text="Age" Style="{StaticResource CaptionTextBlockStyle}"/>
+                        <TextBlock x:Uid="Age_TextBlock" 
+                                   Text="" 
+                                   Style="{StaticResource CaptionTextBlockStyle}"/>
                         <TextBlock Text="{Binding Age}" Style="{StaticResource TitleTextBlockStyle}"/>
                     </StackPanel>
                     <StackPanel Grid.Column="2" Grid.Row="0"
                             Orientation="Vertical"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center">
-                        <TextBlock Text="Target" Style="{StaticResource CaptionTextBlockStyle}"/>
+                        <TextBlock x:Uid="Target_TextBlock" 
+                                   Text="" 
+                                   Style="{StaticResource CaptionTextBlockStyle}"/>
                         <TextBlock Text="{Binding TargetWeight}" Style="{StaticResource TitleTextBlockStyle}"/>
                     </StackPanel>
                 </Grid>
@@ -162,18 +168,22 @@
                     </StackPanel>
 
                 </Grid>
-                <StackPanel Grid.Column="0" Grid.Row="2">
+                <StackPanel Grid.Column="0" Grid.Row="2" VerticalAlignment="Bottom">
                     <charting:Chart
-                        Height="Auto"
+                        Height="200"
                         Width="Auto"
                         x:Name="LineChart" 
                         LegendTitle="Weight"
                         Margin="0,0">
-                        <charting:LineSeries ItemsSource="{Binding Chart}" 
+                        <charting:LineSeries ItemsSource="{Binding Chart}"
                                              IndependentValueBinding="{Binding Date, Converter={StaticResource DataPtBrConverter}}"
                                              DependentValueBinding="{Binding Weight, Converter={StaticResource WeightConverter}}" 
                                              IsSelectionEnabled="True" 
-                                             FontSize="12" FontFamily="Yu Gothic">
+                                             FontSize="12" 
+                                             FontFamily="Yu Gothic" 
+                                             Height="120" 
+                                             Margin="0,-30" 
+                                             FlowDirection="LeftToRight">
                             <charting:LineSeries.DataPointStyle>
                                 <Style TargetType="charting:LineDataPoint">
                                     <Setter Property="Background" Value="WhiteSmoke"/>
@@ -187,8 +197,11 @@
                         </charting:LineSeries>
                         <charting:Chart.Axes>
                             <charting:CategoryAxis Orientation="X" 
+                                                   FlowDirection="LeftToRight" 
                                                    Location="Bottom" 
-                                                   ShowGridLines="True" FontSize="12" FontFamily="Yu Gothic"/>
+                                                   ShowGridLines="True" 
+                                                   FontSize="12" 
+                                                   FontFamily="Yu Gothic"/>
                         </charting:Chart.Axes>
                     </charting:Chart>
                 </StackPanel>

@@ -148,7 +148,7 @@ namespace GotoHealth10.Repositories
             {
                 using (var db = new Context())
                 {
-                    var items = await Task.Factory.StartNew(() => db.Weighing.OrderByDescending(a => a.Date).Take(takeItems));
+                    var items = await Task.Factory.StartNew(() => db.Weighing.OrderBy(a => a.Date).Take(takeItems));
                     ObservableCollection<WeighingModel> itemsDesc = new ObservableCollection<WeighingModel>(items);
                     return itemsDesc;
                 }

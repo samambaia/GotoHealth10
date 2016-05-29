@@ -12,12 +12,8 @@ namespace GotoHealth10.ViewModels
 {
     public class AddWeightPageViewModel : ViewModelBase
     {
-        public AddWeightPageViewModel()
-        {
-            Date = _DateDt[0];
-        }
 
-        string[] _DateDt = DateTime.Now.GetDateTimeFormats('d', CultureInfo.CurrentCulture);
+        //string[] _DateDt = DateTime.Now.GetDateTimeFormats('d', CultureInfo.CurrentCulture);
 
         WeighingRepository dailyRepository = new WeighingRepository();
         UserRepository userRepository = new UserRepository();
@@ -29,12 +25,12 @@ namespace GotoHealth10.ViewModels
             set{ Set(ref _Weight, value); }
         }
 
-        string _Date;
-        public string Date
-        {
-            get{ return _Date; }
-            set{ Set(ref _Date, value); }
-        }
+        //string _Date;
+        //public string Date
+        //{
+        //    get{ return _Date; }
+        //    set{ Set(ref _Date, value); }
+        //}
 
         string _Difference;
         public string Difference
@@ -149,7 +145,7 @@ namespace GotoHealth10.ViewModels
 
             var checkModel = new WeighingModel
             {
-                Date = DateTime.Parse(Date),
+                Date = DateTime.Now,
                 Weight = Weight,
                 UpDown = UpDown,
                 Difference = Difference,

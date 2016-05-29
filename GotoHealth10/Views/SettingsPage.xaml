@@ -48,7 +48,7 @@
         </VisualStateManager.VisualStateGroups>
 
         <!--  header  -->
-        <controls:PageHeader x:Name="pageHeader" Content="Settings Page"
+        <controls:PageHeader x:Name="pageHeader" Content="Settings Page" x:Uid="PageHeader_Settings"
                              Frame="{x:Bind Frame}"
                              RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"
@@ -62,22 +62,29 @@
                RelativePanel.Below="pageHeader">
 
             <!--  settings  -->
-            <PivotItem DataContext="{Binding SettingsPartViewModel}" Header="Settings">
+            <PivotItem
+                x:Uid="PivotItem_Settings"
+                DataContext="{Binding SettingsPartViewModel}" 
+                Header="">
                 <ScrollViewer Margin="0,12,-12,0" HorizontalContentAlignment="Left"
                               VerticalScrollBarVisibility="Auto">
                     <RelativePanel HorizontalAlignment="Left">
 
                         <ToggleSwitch x:Name="UseShellDrawnBackButtonToggleSwtich"
-                                      Header="Use shell-drawn back button"
+                                      x:Uid="UseShellDrawnBackButtonToggleSwtich"
+                                      Header=""
                                       IsOn="{Binding UseShellBackButton, Mode=TwoWay}"
-                                      OffContent="Back button in page header"
-                                      OnContent="Back button in titlebar or taskbar"
+                                      OffContent=""
+                                      OnContent=""
                                       RelativePanel.AlignLeftWithPanel="True"
                                       RelativePanel.AlignTopWithPanel="True" />
 
-                        <ToggleSwitch x:Name="UseLightThemeToggleSwitch" Header="Use Light Theme"
+                        <ToggleSwitch x:Name="UseLightThemeToggleSwitch" 
+                                      x:Uid="UseLightThemeToggleSwitch"
+                                      Header=""
                                       IsOn="{Binding UseLightThemeButton, Mode=TwoWay}"
-                                      OffContent="Dark theme" OnContent="Light theme"
+                                      OffContent="" 
+                                      OnContent=""
                                       RelativePanel.AlignLeftWithPanel="True"
                                       RelativePanel.Below="UseShellDrawnBackButtonToggleSwtich" />
 
@@ -140,7 +147,9 @@
             </PivotItem>-->
 
             <!--  about  -->
-            <PivotItem Header="About">
+            <PivotItem 
+                x:Uid="PivotItem_About"
+                Header="">
                 <RelativePanel DataContext="{Binding AboutPartViewModel}">
 
                     <Border x:Name="LogoImage" HorizontalAlignment="Right"
@@ -169,7 +178,7 @@
                     <TextBlock x:Name="VersionTextBlock"
                                RelativePanel.AlignLeftWithPanel="True"
                                RelativePanel.Below="PublisherTextBlock">
-                        <Run>Version</Run>
+                        <Run x:Uid="Run_Version" Text=""/>
                         <Run Text="{Binding Version}" />
                     </TextBlock>
 

@@ -31,8 +31,11 @@
                 <StackPanel Orientation="Horizontal">
                     <SymbolIcon Width="48" Height="48"
                                 Symbol="Calculator" />
-                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center"
-                               Text="Daily Weighing" />
+                    <TextBlock 
+                        x:Uid="HamburgerButton_DailyWeighing"
+                        Margin="12,0,0,0" 
+                        VerticalAlignment="Center"
+                        Text=""/>
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
             <Controls:HamburgerButtonInfo 
@@ -41,8 +44,11 @@
                 <StackPanel Orientation="Horizontal">
                     <SymbolIcon Width="48" Height="48"
                                 Symbol="List" />
-                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center"
-                               Text="Historic Weighing" />
+                    <TextBlock
+                        x:Uid="HamburgerButton_HistoricWeighing"
+                        Margin="12,0,0,0" 
+                        VerticalAlignment="Center"
+                        Text=""/>
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
             <Controls:HamburgerButtonInfo 
@@ -51,8 +57,10 @@
                 <StackPanel Orientation="Horizontal">
                     <SymbolIcon Width="48" Height="48"
                                 Symbol="Contact" />
-                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center"
-                               Text="Profile" />
+                    <TextBlock 
+                        x:Uid="HamburgerButton_Profile"
+                        Margin="12,0,0,0" 
+                        VerticalAlignment="Center"/>
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
         </Controls:HamburgerMenu.PrimaryButtons>
@@ -60,7 +68,6 @@
         <Controls:HamburgerMenu.SecondaryButtons>
             <!--  settingspage button  -->
             <Controls:HamburgerButtonInfo 
-                x:Name="SettingsButton" 
                 PageParameter="0"
                 PageType="views:SettingsPage">
                 <Controls:HamburgerButtonInfo.NavigationTransitionInfo>
@@ -69,8 +76,10 @@
                 <StackPanel Orientation="Horizontal">
                     <SymbolIcon Width="48" Height="48"
                                 Symbol="Setting" />
-                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center"
-                               Text="Settings" />
+                    <TextBlock 
+                        x:Uid="HamburgerButton_Settings"
+                        Margin="12,0,0,0" 
+                        VerticalAlignment="Center"/>
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
         </Controls:HamburgerMenu.SecondaryButtons>

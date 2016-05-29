@@ -47,10 +47,10 @@
         </VisualStateManager.VisualStateGroups>
 
         <!--  header  -->
-        <controls:PageHeader x:Name="pageHeader" Frame="{x:Bind Frame}"
+        <controls:PageHeader x:Uid="PageHeader_AddWeight" x:Name="pageHeader" Frame="{x:Bind Frame}"
                              RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"
-                             RelativePanel.AlignTopWithPanel="True" Text="Add Weighing" />
+                             RelativePanel.AlignTopWithPanel="True" Text="" />
 
         <!--  content  -->
         <ScrollViewer RelativePanel.AlignBottomWithPanel="True"
@@ -62,21 +62,22 @@
             <StackPanel Orientation="Vertical" 
                     VerticalAlignment="Center"
                     Width="180">
-                <TextBox 
+                <!--<TextBox 
                     Text="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     PlaceholderText="Date"
                     FontFamily="Yu Gothic"
                     FontSize="20"
-                    Language="pt-BR"/>
-                <TextBox                     
+                    Language="pt-BR"/>-->
+                <TextBox
+                    x:Uid="Weight_TextBox"
                     Text="{Binding Weight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                     Margin="0,20"
                     InputScope="Digits"
-                    PlaceholderText="Weight"
+                    PlaceholderText=""
                     FontFamily="Yu Gothic" 
                     FontSize="35" 
                     TextAlignment="Center"/>
-                <Button x:Name="addButton"
+                <Button x:Uid="Add_Button"
                     Click="{x:Bind ViewModel.AddWeight}" 
                     HorizontalAlignment="Stretch" 
                     VerticalAlignment="Stretch" 
