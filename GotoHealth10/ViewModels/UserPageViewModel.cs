@@ -20,6 +20,7 @@ namespace GotoHealth10.ViewModels
         public UserPageViewModel()
         {
             Genders = Enum.GetValues(typeof(GenderType));
+            TargetDate = new DateTimeOffset(DateTime.Now);
         }
 
         GenderType _SelectedItem;
@@ -97,6 +98,13 @@ namespace GotoHealth10.ViewModels
             set { Set(ref _TargetWeight, value); }
         }
 
+        DateTimeOffset _TargetDate;
+        public DateTimeOffset TargetDate
+        {
+            get { return _TargetDate.DateTime; }
+            set { Set(ref _TargetDate, value.DateTime); }
+        }
+
         Array _Genders;
         public Array Genders
         {
@@ -116,11 +124,12 @@ namespace GotoHealth10.ViewModels
                 Id = existUser.Id;
                 Email = existUser.Email;
                 NickName = existUser.NickName;
-                Age = existUser.Age;
+                Age = existUser.Age.ToString();
                 SelectedItem = (GenderType)(existUser.Gender == "Male" ? 0 : 1);
-                InitialWeight = existUser.InitialWeigth;
-                Height = existUser.Height;
-                TargetWeight = existUser.TargetWeight;
+                InitialWeight = existUser.InitialWeigth.ToString();
+                Height = existUser.Height.ToString();
+                TargetWeight = existUser.TargetWeight.ToString();
+                TargetDate = existUser.TargetDate;
             }
 
             await Task.CompletedTask;
@@ -157,11 +166,12 @@ namespace GotoHealth10.ViewModels
                 Email = Email,
                 NickName = NickName,
                 Logged = "1",
-                Age = Age,
+                Age = short.Parse(Age),
                 Gender = Gender,
-                InitialWeigth = InitialWeight,
-                Height = Height,
-                TargetWeight = TargetWeight
+                InitialWeigth = double.Parse(InitialWeight),
+                Height = double.Parse(Height),
+                TargetWeight = double.Parse(TargetWeight),
+                TargetDate = TargetDate.DateTime
             };
 
             await userRepository.SaveUserAsync(userModel);
@@ -177,11 +187,12 @@ namespace GotoHealth10.ViewModels
                 Email = Email,
                 NickName = NickName,
                 Logged = "1",
-                Age = Age,
+                Age = short.Parse(Age),
                 Gender = Gender,
-                InitialWeigth = InitialWeight,
-                Height = Height,
-                TargetWeight = TargetWeight
+                InitialWeigth = double.Parse(InitialWeight),
+                Height = double.Parse(Height),
+                TargetWeight = double.Parse(TargetWeight),
+                TargetDate = TargetDate.DateTime
             };
 
             await userRepository.UpdateUserAsync(userModel);

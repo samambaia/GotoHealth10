@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
 namespace GotoHealth10.Converters
 {
-    class WeightConverter : IValueConverter
+    class DateTimePtBrConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value != null)
+            if (value == null)
             {
-                var weight = double.Parse(value.ToString());
-                return weight;
+                return string.Empty;
             }
-            else
-                return 35;
+
+            string datePtBr = ((DateTime)value).Day.ToString().PadLeft(2, 'O') + "/" + ((DateTime)value).Month.ToString().PadLeft(2, '0');
+            string timePtBr = ((DateTime)value).Hour.ToString().PadLeft(2, 'O') + ":" + ((DateTime)value).Minute.ToString().PadLeft(2, '0');
+
+            return datePtBr + " " + timePtBr;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

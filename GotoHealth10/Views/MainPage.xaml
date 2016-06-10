@@ -20,7 +20,7 @@
     </Page.DataContext>
 
     <Page.Resources>
-        <Converters:DataPtBrConverter x:Key="DataPtBrConverter"/>
+        <Converters:DatePtBrConverter x:Key="DatePtBrConverter"/>
         <Converters:LikeDislikeConverter x:Key="LikeDislikeConverter"/>
         <Converters:WeightConverter x:Key="WeightConverter"/>
         <Converters:IMCConverter x:Key="IMCConverter"/>
@@ -176,14 +176,14 @@
                         LegendTitle="Weight"
                         Margin="0,0">
                         <charting:LineSeries ItemsSource="{Binding Chart}"
-                                             IndependentValueBinding="{Binding Date, Converter={StaticResource DataPtBrConverter}}"
+                                             IndependentValueBinding="{Binding Date, Converter={StaticResource DatePtBrConverter}}"
                                              DependentValueBinding="{Binding Weight, Converter={StaticResource WeightConverter}}" 
                                              IsSelectionEnabled="True" 
                                              FontSize="12" 
                                              FontFamily="Yu Gothic" 
                                              Height="120" 
                                              Margin="0,-30" 
-                                             FlowDirection="LeftToRight">
+                                             FlowDirection="RightToLeft">
                             <charting:LineSeries.DataPointStyle>
                                 <Style TargetType="charting:LineDataPoint">
                                     <Setter Property="Background" Value="WhiteSmoke"/>
@@ -197,7 +197,7 @@
                         </charting:LineSeries>
                         <charting:Chart.Axes>
                             <charting:CategoryAxis Orientation="X" 
-                                                   FlowDirection="LeftToRight" 
+                                                   FlowDirection="RightToLeft" 
                                                    Location="Bottom" 
                                                    ShowGridLines="True" 
                                                    FontSize="12" 

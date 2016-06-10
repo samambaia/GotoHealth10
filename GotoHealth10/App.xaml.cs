@@ -1,9 +1,11 @@
 using GotoHealth10.Models;
+using GotoHealth10.Repositories;
 using GotoHealth10.Services.SettingsServices;
-using Microsoft.Data.Entity;
+using System.Globalization;
 using System.Threading.Tasks;
 using Template10.Controls;
 using Windows.ApplicationModel.Activation;
+using Windows.Globalization;
 using Windows.UI.Xaml;
 
 namespace GotoHealth10
@@ -21,8 +23,9 @@ namespace GotoHealth10
             using (var db = new Context())
             {
                 //db.Database.EnsureDeleted();
-                //db.Database.EnsureCreated();
-                db.Database.Migrate();
+                //var addCol = db.User.FromSql("ALTER TABLE UserModel ADD COLUMN teste Text;");
+                db.Database.EnsureCreated();
+                //db.Database.Migrate();
             }
 
             #region App settings
@@ -36,6 +39,9 @@ namespace GotoHealth10
 
             Microsoft.HockeyApp.HockeyClient.Current.Configure("4bc0f0ec461f4cd8b2cbda32a42002aa");
 
+            // Define current language to the App
+            //ApplicationLanguages.PrimaryLanguageOverride = "pt-BR";
+            ApplicationLanguages.PrimaryLanguageOverride = "en-US";
         }
 
         public override async Task OnInitializeAsync(IActivatedEventArgs args)
@@ -59,7 +65,29 @@ namespace GotoHealth10
         {
             // long-running startup tasks go here
 
-            NavigationService.Navigate(typeof(Views.MainPage));
+            WeighingRepository dailyRepository = new WeighingRepository();
+            UserRepository userRepository = new UserRepository();
+
+            var existUser = userRepository.FindUser();
+
+            if (existUser == null)
+            {
+                NavigationService.Navigate(typeof(Views.UserPage));
+            }
+            else
+            {
+                // Ckeck if a Weight exists
+                var lastCheck = await dailyRepository.LastCheckAsync();
+                if (lastCheck == null)
+                {
+                    NavigationService.Navigate(typeof(Views.AddWeightPage));
+                }
+                else
+                {
+                    NavigationService.Navigate(typeof(Views.MainPage));
+                }
+            }
+
             await Task.CompletedTask;
         }
     }

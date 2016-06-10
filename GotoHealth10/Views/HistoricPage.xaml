@@ -17,7 +17,7 @@
     </Page.DataContext>
 
     <Page.Resources>
-        <Converters:DataPtBrConverter x:Key="DataPtBrConverter"/>
+        <Converters:DateTimePtBrConverter x:Key="DateTimePtBrConverter"/>
     </Page.Resources>
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -80,7 +80,7 @@
                                 </Grid.RowDefinitions>
                                 <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0">
                                     <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" 
-                                               Text="{Binding Date, Converter={StaticResource DataPtBrConverter}}"
+                                               Text="{Binding Date, Converter={StaticResource DateTimePtBrConverter}}"
                                                x:Name="Date"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center">

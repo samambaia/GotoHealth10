@@ -7,9 +7,9 @@ namespace GotoHealth10.Models
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
-        public string Weight { get; set; }
+        public double Weight { get; set; }
         public string UpDown { get; set; }
         public string Difference { get; set; }
-        public string IMC { get; set; }
+        public double IMC { get; set; }
     }
 }

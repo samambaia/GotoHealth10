@@ -162,7 +162,7 @@
     <comment>Shell.xaml</comment>
   </data>
   <data name="Height_TextBox.PlaceholderText" xml:space="preserve">
-    <value>Height Ex: 1,63</value>
+    <value>Height Ex: 1.63</value>
     <comment>UserPage.xaml</comment>
   </data>
   <data name="InitialWeight_TextBox.PlaceholderText" xml:space="preserve">
@@ -207,6 +207,10 @@
   </data>
   <data name="SaveUser_Button.Content" xml:space="preserve">
     <value>Let's Go!</value>
+    <comment>UserPage.xaml</comment>
+  </data>
+  <data name="Target_DatePicker.Header" xml:space="preserve">
+    <value>When</value>
     <comment>UserPage.xaml</comment>
   </data>
   <data name="Target_TextBlock.Text" xml:space="preserve">

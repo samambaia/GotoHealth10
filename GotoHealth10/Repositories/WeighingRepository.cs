@@ -148,7 +148,7 @@ namespace GotoHealth10.Repositories
             {
                 using (var db = new Context())
                 {
-                    var items = await Task.Factory.StartNew(() => db.Weighing.OrderBy(a => a.Date).Take(takeItems));
+                    var items = await Task.Factory.StartNew(() => db.Weighing.OrderByDescending(a => a.Date).Take(takeItems));
                     ObservableCollection<WeighingModel> itemsDesc = new ObservableCollection<WeighingModel>(items);
                     return itemsDesc;
                 }
@@ -158,6 +158,24 @@ namespace GotoHealth10.Repositories
                 throw new Exception(ex.Message);
             }
         }
+
+        public async Task<ObservableCollection<WeighingModel>> LoadWeighingDescAsync()
+        {
+            try
+            {
+                using (var db = new Context())
+                {
+                    var items = await Task.Factory.StartNew(() => db.Weighing.OrderByDescending(a => a.Date));
+                    ObservableCollection<WeighingModel> itemsDesc = new ObservableCollection<WeighingModel>(items);
+                    return itemsDesc;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
 
         public async Task<WeighingModel> FindSelectedItemAsync(int Id)
         {

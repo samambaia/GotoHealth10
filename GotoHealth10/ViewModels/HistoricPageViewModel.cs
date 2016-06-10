@@ -21,20 +21,20 @@ namespace GotoHealth10.ViewModels
                     new WeighingModel()
                     {
                         Id = 1,
-                        Date = new DateTime(2016, 4, 25),
-                        Weight = "72.0"
+                        Date = new DateTime(2016, 4, 25, 12, 45, 0),
+                        Weight = 72.0
                     },
                     new WeighingModel()
                     {
                         Id = 2,
-                        Date = new DateTime(2016, 4, 26),
-                        Weight = "71.2"
+                        Date = new DateTime(2016, 4, 26, 8, 10, 22),
+                        Weight = 71.2
                     },
                     new WeighingModel()
                     {
                         Id = 3,
-                        Date = new DateTime(2016, 4, 27),
-                        Weight = "60.0"
+                        Date = new DateTime(2016, 4, 27, 9, 11, 0),
+                        Weight = 60.0
                     }
                 };
 
@@ -101,7 +101,7 @@ namespace GotoHealth10.ViewModels
         {
             WeighingRepository _dailyRepository = new WeighingRepository();
 
-            var result = _dailyRepository.LoadWeighingAsync(10);
+            var result = _dailyRepository.LoadWeighingDescAsync();
             return result;
         }
 

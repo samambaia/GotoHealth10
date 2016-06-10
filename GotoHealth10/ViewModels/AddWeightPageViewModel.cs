@@ -2,7 +2,6 @@ using GotoHealth10.Models;
 using GotoHealth10.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Threading.Tasks;
 using Template10.Mvvm;
 using Template10.Services.NavigationService;
@@ -17,6 +16,10 @@ namespace GotoHealth10.ViewModels
 
         WeighingRepository dailyRepository = new WeighingRepository();
         UserRepository userRepository = new UserRepository();
+        public AddWeightPageViewModel()
+        {
+            Weight = "35";
+        }
 
         string _Weight;
         public string Weight
@@ -48,15 +51,15 @@ namespace GotoHealth10.ViewModels
 
         #region IMC Calc
 
-        string _Height;
-        public string Height
+        double _Height;
+        public double Height
         {
             get { return _Height; }
             set { Set(ref _Height, value); }
         }
 
-        string _IMC;
-        public string IMC
+        double _IMC;
+        public double IMC
         {
             get { return _IMC; }
             set { Set(ref _IMC, value); }
@@ -71,7 +74,7 @@ namespace GotoHealth10.ViewModels
             if (paramUser != null)
             {
                 Height = paramUser.Height;
-                Weight = paramUser.InitialWeigth;
+                Weight = paramUser.InitialWeigth.ToString();
             }
             else
             {
@@ -103,7 +106,9 @@ namespace GotoHealth10.ViewModels
 
         async Task SaveWeight()
         {
-            IMC = await CalcIMCAsync(Height, Weight);
+            var _imc = await CalcIMCAsync(Height, double.Parse(Weight));
+
+            IMC = double.Parse(_imc);
 
             int id = 0;
 
@@ -113,7 +118,7 @@ namespace GotoHealth10.ViewModels
             {
                 id = Convert.ToInt32(lastCheck.Id);
 
-                double last = double.Parse(lastCheck.Weight);
+                double last = lastCheck.Weight;
                 double current = double.Parse(Weight);
                 double dif = current - last;
 
@@ -146,7 +151,7 @@ namespace GotoHealth10.ViewModels
             var checkModel = new WeighingModel
             {
                 Date = DateTime.Now,
-                Weight = Weight,
+                Weight = double.Parse(Weight),
                 UpDown = UpDown,
                 Difference = Difference,
                 IMC = IMC
@@ -157,17 +162,22 @@ namespace GotoHealth10.ViewModels
             GotoDetailsPage();
         }
         
-        async Task<string> CalcIMCAsync(string height, string weight)
+        async Task<string> CalcIMCAsync(double height, double weight)
         {
             return await Task.Run(() => CalcIMC(height, weight));
         }
 
-        string CalcIMC(string height, string weight)
+        string CalcIMC(double height, double weight)
         {
-            double _height = double.Parse(height);
-            double _weight = double.Parse(weight);
-            double _heightPow = Math.Pow(_height, 2);
-            var imc = _weight / _heightPow;
+            ////height = height.Replace(',', '.');
+            //var _height = double.Parse(height, CultureInfo.CurrentUICulture);
+            ////weight = weight.Replace(',', '.');
+            //var _weight = double.Parse(weight, CultureInfo.CurrentUICulture);
+            //var _heightPow = Math.Pow(_height, 2);
+            //var imc = _weight / _heightPow;
+
+            var _heightPow = Math.Pow(height, 2);
+            var imc = weight / _heightPow;
 
             return imc.ToString("N2");
         }

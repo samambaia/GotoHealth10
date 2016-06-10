@@ -209,6 +209,10 @@
     <value>Vamos Lá!</value>
     <comment>UserPage.xaml</comment>
   </data>
+  <data name="Target_DatePicker.Header" xml:space="preserve">
+    <value>Quando</value>
+    <comment>UserPage.xaml</comment>
+  </data>
   <data name="Target_TextBlock.Text" xml:space="preserve">
     <value>Objetivo</value>
     <comment>MainPage.xaml</comment>

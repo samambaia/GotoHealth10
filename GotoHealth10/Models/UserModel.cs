@@ -12,10 +12,11 @@ namespace GotoHealth10.Models
         public string Email { get; set; }
         public string NickName { get; set; }
         public string Logged { get; set; }
-        public string Age { get; set; }
+        public short Age { get; set; }
         public string Gender { get; set; }
-        public string InitialWeigth { get; set; }
-        public string Height { get; set; }
-        public string TargetWeight { get; set; }
+        public double InitialWeigth { get; set; }
+        public double Height { get; set; }
+        public double TargetWeight { get; set; }
+        public DateTime TargetDate { get; set; }
     }
 }

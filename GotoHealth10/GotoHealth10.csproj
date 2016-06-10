@@ -109,7 +109,14 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\DataPtBrConverter.cs" />
+    <Compile Include="Controls\AgePickControl.xaml.cs">
+      <DependentUpon>AgePickControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NumPickerControl.xaml.cs">
+      <DependentUpon>NumPickerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\DateTimePtBrConverter.cs" />
+    <Compile Include="Converters\DatePtBrConverter.cs" />
     <Compile Include="Converters\IMCConverter.cs" />
     <Compile Include="Converters\LikeDislikeConverter.cs" />
     <Compile Include="Converters\SelectGenderConverter.cs" />
@@ -211,6 +218,14 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\AgePickControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NumPickerControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Styles\Custom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -253,9 +268,6 @@
   <ItemGroup>
     <SDKReference Include="Microsoft.VCLibs, Version=14.0">
       <Name>Visual C++ 2015 Runtime for Universal Windows Platform Apps</Name>
-    </SDKReference>
-    <SDKReference Include="SQLite.UWP.2015, Version=3.12.2">
-      <Name>SQLite for Universal Windows Platform</Name>
     </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

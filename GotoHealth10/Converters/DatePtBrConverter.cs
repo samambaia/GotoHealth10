@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Data;
 
 namespace GotoHealth10.Converters
 {
-    class DataPtBrConverter : IValueConverter
+    class DatePtBrConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
@@ -16,9 +16,9 @@ namespace GotoHealth10.Converters
                 return string.Empty;
             }
 
-            var dataPtBr = ((DateTime)value).Day.ToString().PadLeft(2, 'O') + "/" + ((DateTime)value).Month.ToString().PadLeft(2, '0');
+            string datePtBr = ((DateTime)value).Day.ToString().PadLeft(2, 'O') + "/" + ((DateTime)value).Month.ToString().PadLeft(2, '0');
 
-            return dataPtBr;
+            return datePtBr;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

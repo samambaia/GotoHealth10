@@ -5,6 +5,8 @@
       xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
       xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:controls="using:Template10.Controls"
+      xmlns:mycontrols="using:GotoHealth10.Controls"
+      xmlns:Converters="using:GotoHealth10.Converters"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:GotoHealth10.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -14,6 +16,10 @@
     <Page.DataContext>
         <vm:AddWeightPageViewModel x:Name="ViewModel" />
     </Page.DataContext>
+
+    <Page.Resources>
+        <Converters:WeightConverter x:Key="WeightConverter"/>
+    </Page.Resources>
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -61,14 +67,22 @@
 
             <StackPanel Orientation="Vertical" 
                     VerticalAlignment="Center"
-                    Width="180">
+                    Width="Auto">
                 <!--<TextBox 
                     Text="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     PlaceholderText="Date"
                     FontFamily="Yu Gothic"
                     FontSize="20"
                     Language="pt-BR"/>-->
-                <TextBox
+                <mycontrols:NumPickerControl
+                    Width="Auto"
+                    Height="100"
+                    FontFamily="Yu Gothic" 
+                    FontSize="35"
+                    MinValue="35"
+                    MaxValue="250"
+                    Weight="{x:Bind ViewModel.Weight, Converter={StaticResource WeightConverter}}"/>
+                <!--<TextBox
                     x:Uid="Weight_TextBox"
                     Text="{Binding Weight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                     Margin="0,20"
@@ -76,7 +90,7 @@
                     PlaceholderText=""
                     FontFamily="Yu Gothic" 
                     FontSize="35" 
-                    TextAlignment="Center"/>
+                    TextAlignment="Center"/>-->
                 <Button x:Uid="Add_Button"
                     Click="{x:Bind ViewModel.AddWeight}" 
                     HorizontalAlignment="Stretch" 

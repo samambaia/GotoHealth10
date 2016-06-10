@@ -16,13 +16,13 @@ namespace GotoHealth10.ViewModels
     {
         public MainPageViewModel()
         {
-            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
-            {
-                Date = _DateDt;
-                Weight = _Weight;
-                UpDown = _UpDown;
-                Difference = _Difference;
-            }
+            //if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+            //{
+            //    Date = _DateDt;
+            //    Weight = _Weight;
+            //    UpDown = _UpDown;
+            //    Difference = _Difference;
+            //}
         }
 
         WeighingRepository dailyRepository = new WeighingRepository();
@@ -30,8 +30,8 @@ namespace GotoHealth10.ViewModels
 
         #region Weight Proprerties
 
-        string _Weight = "69,9";
-        public string Weight { get { return _Weight; } set { Set(ref _Weight, value); } }
+        double _Weight = 69.9;
+        public double Weight { get { return _Weight; } set { Set(ref _Weight, value); } }
 
         string _DateDt = DateTime.Today.Date.ToString("dd/MM/yyyy");
         public string Date { get { return _DateDt; } set { Set(ref _DateDt, value); } }
@@ -60,8 +60,8 @@ namespace GotoHealth10.ViewModels
             set {Set( ref _Chart, value); }
         }
 
-        string _Imc = "24,99";
-        public string Imc
+        double _Imc;
+        public double Imc
         {
             get { return _Imc; }
             set { Set(ref _Imc, value); }
@@ -85,15 +85,15 @@ namespace GotoHealth10.ViewModels
             set { Set(ref _Age, value); }
         }
 
-        private string _TargetWeight;
-        public string TargetWeight
+        double _TargetWeight;
+        public double TargetWeight
         {
             get { return _TargetWeight; }
             set { Set(ref _TargetWeight, value); }
         }
 
-        string _Height;
-        public string Height
+        double _Height;
+        public double Height
         {
             get { return _Height; }
             set { _Height = value; }
@@ -103,50 +103,50 @@ namespace GotoHealth10.ViewModels
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            var existUser = userRepository.FindUser();
+            // Ckeck if a Weight exists
+            var lastCheck = await dailyRepository.LastCheckAsync();
 
+            // Check if a user exists
+            var existUser = userRepository.FindUser();
             if (existUser == null)
             {
                 GotoUserPage();
             }
             else
             {
+                if (lastCheck == null)
+                {
+                    GotoAddWeightPage();
+                }
+            }
+
+            if (existUser != null)
+            {
                 NickName = existUser.NickName;
-                Age = existUser.Age;
+                Age = existUser.Age.ToString();
                 TargetWeight = existUser.TargetWeight;
                 Height = existUser.Height;
+            }
 
-                var par = ((WeighingModel)parameter);
-                if (par != null)
-                {
-                    Date = par.Date.ToString();
-                    Weight = par.Weight;
-                    UpDown = par.UpDown;
-                    Difference = par.Difference;
-                    Imc = par.IMC;
-                }
-                else
-                {
-                    var lastCheck = await dailyRepository.LastCheckAsync();
-                    if (lastCheck != null)
-                    {
-                        Date = lastCheck.Date.ToString();
-                        Weight = lastCheck.Weight;
-                        UpDown = lastCheck.UpDown;
-                        Difference = lastCheck.Difference;
-                        Imc = lastCheck.IMC;
-                    }
-                    else if (parameter != null)
-                    {
-                        Date = _DateDt;
-                        Weight = _Weight;
-                        UpDown = _UpDown;
-                        Difference = _Difference;
-                        Imc = _Imc;
-                    }
+            if (lastCheck != null)
+            {
+                Date = lastCheck.Date.ToString();
+                Weight = lastCheck.Weight;
+                UpDown = lastCheck.UpDown;
+                Difference = lastCheck.Difference;
+                Imc = lastCheck.IMC;
 
-                    Chart = await dailyRepository.LoadWeighingAsync(5);
-                }
+                Chart = await dailyRepository.LoadWeighingAsync(5);
+            }
+
+            var par = ((WeighingModel)parameter);
+            if (par != null)
+            {
+                Date = par.Date.ToString();
+                Weight = par.Weight;
+                UpDown = par.UpDown;
+                Difference = par.Difference;
+                Imc = par.IMC;
             }
 
             await Task.CompletedTask;

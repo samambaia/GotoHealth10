@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,9 +16,10 @@ namespace GotoHealth10.Converters
 
             if (value != null)
             {
-                string imc = value.ToString();
+                //var imc = value.ToString().Replace('.',',');
+                var imc = value.ToString();
 
-                double vlr = double.Parse(value.ToString());
+                var vlr = double.Parse(value.ToString(), CultureInfo.CurrentUICulture);
                 if (vlr < 17)
                 {
                     result = imc + " - Muito abaixo do Peso";
