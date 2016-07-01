@@ -1,6 +1,7 @@
 using GotoHealth10.Models;
 using GotoHealth10.Repositories;
 using GotoHealth10.Services.SettingsServices;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
 using Template10.Controls;
@@ -41,7 +42,7 @@ namespace GotoHealth10
 
             // Define current language to the App
             //ApplicationLanguages.PrimaryLanguageOverride = "pt-BR";
-            ApplicationLanguages.PrimaryLanguageOverride = "en-US";
+            //ApplicationLanguages.PrimaryLanguageOverride = "en-US";
         }
 
         public override async Task OnInitializeAsync(IActivatedEventArgs args)
@@ -84,6 +85,7 @@ namespace GotoHealth10
                 }
                 else
                 {
+
                     NavigationService.Navigate(typeof(Views.MainPage));
                 }
             }

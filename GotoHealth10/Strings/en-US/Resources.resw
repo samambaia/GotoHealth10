@@ -137,6 +137,10 @@
     <value>Settings</value>
     <comment>MainPage.xaml</comment>
   </data>
+  <data name="BestWeight_TextBlock.Text" xml:space="preserve">
+    <value>Best Weight:</value>
+    <comment>MainPage.xaml</comment>
+  </data>
   <data name="Email_TextBox.PlaceholderText" xml:space="preserve">
     <value>Email</value>
     <comment>UserPage.xaml</comment>

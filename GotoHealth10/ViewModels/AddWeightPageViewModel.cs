@@ -69,6 +69,13 @@ namespace GotoHealth10.ViewModels
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            var lastCheck = await dailyRepository.LastCheckAsync();
+
+            if (lastCheck != null)
+            {
+                Weight = lastCheck.Weight.ToString("N1");
+            }
+
             var paramUser = (UserModel)parameter;
 
             if (paramUser != null)
@@ -99,10 +106,18 @@ namespace GotoHealth10.ViewModels
             await Task.CompletedTask;
         }
 
-        public async Task AddWeight()
+        /// <summary>
+        /// Para incluir uma lista - teste
+        /// </summary>
+        public void AddWeight()
         {
-            await SaveWeight();
+            dailyRepository.ListAddWeighing();
         }
+
+        //public async Task AddWeight()
+        //{
+        //    await SaveWeight();
+        //}
 
         async Task SaveWeight()
         {

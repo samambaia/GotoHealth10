@@ -28,7 +28,18 @@ namespace GotoHealth10.ViewModels
         WeighingRepository dailyRepository = new WeighingRepository();
         UserRepository userRepository = new UserRepository();
 
-        #region Weight Proprerties
+        #region Main Properties
+
+        double _BestWeight;
+        public double BestWeight
+        {
+            get { return _BestWeight; }
+            set { Set(ref _BestWeight, value); }
+        }
+
+        #endregion
+
+        #region Weight Properties
 
         double _Weight = 69.9;
         public double Weight { get { return _Weight; } set { Set(ref _Weight, value); } }
@@ -36,7 +47,7 @@ namespace GotoHealth10.ViewModels
         string _DateDt = DateTime.Today.Date.ToString("dd/MM/yyyy");
         public string Date { get { return _DateDt; } set { Set(ref _DateDt, value); } }
 
-        string _Difference = "0,7";
+        string _Difference = "0.7";
         public string Difference
         {
             get { return _Difference; }
@@ -106,6 +117,10 @@ namespace GotoHealth10.ViewModels
             // Ckeck if a Weight exists
             var lastCheck = await dailyRepository.LastCheckAsync();
 
+            // Check the best Weight
+
+            BestWeight = await dailyRepository.BestWeightAsync();
+
             // Check if a user exists
             var existUser = userRepository.FindUser();
             if (existUser == null)
@@ -136,7 +151,7 @@ namespace GotoHealth10.ViewModels
                 Difference = lastCheck.Difference;
                 Imc = lastCheck.IMC;
 
-                Chart = await dailyRepository.LoadWeighingAsync(5);
+                Chart = await dailyRepository.LoadWeighingAsync(10);
             }
 
             var par = ((WeighingModel)parameter);

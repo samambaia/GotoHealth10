@@ -13,6 +13,7 @@ namespace GotoHealth10.Controls
         public NumPickerControl()
         {
             InitializeComponent();
+            content.Text = Weight.ToString("N1");
         }
 
         public int MinValue
@@ -35,7 +36,6 @@ namespace GotoHealth10.Controls
         public static readonly DependencyProperty MaxValueProperty =
             DependencyProperty.Register("MaxValue", typeof(int), typeof(NumPickerControl), new PropertyMetadata(0));
 
-
         public double Weight
         {
             get { return (double)GetValue(WeightProperty); }
@@ -46,10 +46,9 @@ namespace GotoHealth10.Controls
         public static readonly DependencyProperty WeightProperty =
             DependencyProperty.Register("Weight", typeof(double), typeof(NumPickerControl), new PropertyMetadata(0.0));
 
-        //private static void WEIGHTcHANGED(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        //private static void WeightChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         //{
         //    var instance = d as NumPickerControl;
-            
         //}
 
         private void Reduce_Tapped(object sender, TappedRoutedEventArgs e)

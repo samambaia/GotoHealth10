@@ -11,6 +11,7 @@
       xmlns:local="using:GotoHealth10.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:vm="using:GotoHealth10.ViewModels" 
+      xmlns:syncfusion="using:Syncfusion.UI.Xaml.Controls.Input"
       mc:Ignorable="d">
 
     <Page.DataContext>
@@ -19,7 +20,27 @@
 
     <Page.Resources>
         <Converters:WeightConverter x:Key="WeightConverter"/>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style TargetType="syncfusion:SfNumericUpDown">
+            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="BlockCharactersOnTextInput" Value="True"/>
+            <Setter Property="Background" Value="{StaticResource ButtonBackgroundThemeBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource ButtonForegroundThemeBrush}"/>
+        </Style>
+        <Style TargetType="syncfusion:SfNumericTextBox">
+            <Setter Property="BlockCharactersOnTextInput" Value="True"/>
+            <Setter Property="Background" Value="{StaticResource TextBoxBackgroundThemeBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextBoxForegroundThemeBrush}"/>
+            <Setter Property="FontFamily" Value="Yu Gothic" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
     </Page.Resources>
+
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -68,20 +89,27 @@
             <StackPanel Orientation="Vertical" 
                     VerticalAlignment="Center"
                     Width="Auto">
+                <syncfusion:SfNumericUpDown Margin="10 20" x:Name="updown"
+                    Value="{Binding Weight, Mode=TwoWay}"
+                    Minimum="30"
+                    Maximum="150" FormatString="0.0"
+                    SpinButtonsAlignment="Both"
+                    AutoReverse="False"/>
+
                 <!--<TextBox 
                     Text="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     PlaceholderText="Date"
                     FontFamily="Yu Gothic"
                     FontSize="20"
                     Language="pt-BR"/>-->
-                <mycontrols:NumPickerControl
+                <!--<mycontrols:NumPickerControl
                     Width="Auto"
                     Height="100"
                     FontFamily="Yu Gothic" 
                     FontSize="35"
                     MinValue="35"
                     MaxValue="250"
-                    Weight="{x:Bind ViewModel.Weight, Converter={StaticResource WeightConverter}}"/>
+                    Weight="{x:Bind ViewModel.Weight, Converter={StaticResource WeightConverter}}"/>-->
                 <!--<TextBox
                     x:Uid="Weight_TextBox"
                     Text="{Binding Weight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 

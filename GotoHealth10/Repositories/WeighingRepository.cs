@@ -176,7 +176,6 @@ namespace GotoHealth10.Repositories
             }
         }
 
-
         public async Task<WeighingModel> FindSelectedItemAsync(int Id)
         {
             using (var db = new Context())
@@ -192,6 +191,52 @@ namespace GotoHealth10.Repositories
             {
                 var lastCheck = await Task.Factory.StartNew(() => db.Weighing.OrderByDescending(s => s.Date).FirstOrDefault());
                 return lastCheck;
+            }
+        }
+
+        public async Task<double> BestWeightAsync()
+        {
+            using (var db = new Context())
+            {
+                var bestCheck = await Task.Factory.StartNew(() => db.Weighing.Min(s => s.Weight));
+                return bestCheck;
+            }
+        }
+
+        /// <summary>
+        /// Usado para dar uma carga inicial no APP com os último 10 dias de marcação.
+        /// </summary>
+        public void ListAddWeighing()
+        {
+            var listWeighing = new List<WeighingModel>();
+
+            listWeighing.Add(new WeighingModel() { Date = new System.DateTime(2016, 6, 16), Weight = 72.7, Difference = "0", IMC = 0, UpDown = "0" });
+            listWeighing.Add(new WeighingModel() { Date = new System.DateTime(2016, 6, 17), Weight = 72.6, Difference = "-0.1", IMC = 27.36, UpDown = "0" });
+            listWeighing.Add(new WeighingModel() { Date = new System.DateTime(2016, 6, 18), Weight = 72.8, Difference = "0.2", IMC = 27.33, UpDown = "1" });
+            listWeighing.Add(new WeighingModel() { Date = new System.DateTime(2016, 6, 19), Weight = 72.4, Difference = "-0.2", IMC = 27.25, UpDown = "0" });
+            listWeighing.Add(new WeighingModel() { Date = new System.DateTime(2016, 6, 20), Weight = 72.8, Difference = "0.4", IMC = 27.40, UpDown = "1" });
+            listWeighing.Add(new WeighingModel() { Date = new System.DateTime(2016, 6, 21), Weight = 72.9, Difference = "0.1", IMC = 27.44, UpDown = "1" });
+            listWeighing.Add(new WeighingModel() { Date = new System.DateTime(2016, 6, 22), Weight = 72.4, Difference = "-0.5", IMC = 27.25, UpDown = "0" });
+            listWeighing.Add(new WeighingModel() { Date = new System.DateTime(2016, 6, 25), Weight = 72.4, Difference = "0", IMC = 27.25, UpDown = "0" });
+            listWeighing.Add(new WeighingModel() { Date = new System.DateTime(2016, 6, 27), Weight = 73.5, Difference = "1.1", IMC = 27.66, UpDown = "1" });
+            listWeighing.Add(new WeighingModel() { Date = new System.DateTime(2016, 6, 28), Weight = 72.8, Difference = "-0.7", IMC = 27.40, UpDown = "0" });
+            listWeighing.Add(new WeighingModel() { Date = new System.DateTime(2016, 6, 30), Weight = 72.8, Difference = "-0.7", IMC = 27.40, UpDown = "0" });
+            listWeighing.Add(new WeighingModel() { Date = new System.DateTime(2016, 7, 1), Weight = 73.5, Difference = "0.7", IMC = 27.66, UpDown = "1" });
+
+            foreach (var item in listWeighing)
+            {
+                try
+                {
+                    using (var db = new Context())
+                    {
+                        db.Weighing.Add(item);
+                        db.SaveChanges();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
             }
         }
 
