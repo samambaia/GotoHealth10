@@ -12,45 +12,44 @@ namespace GotoHealth10.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            string result = "Sem Aferição";
 
-            if (value != null)
+            string result = (language == "pt-BR" ? "Sem Aferição" : "Without Verification");
+            var imc = value.ToString();
+
+            if (value != null || value.ToString() != "0")
             {
-                //var imc = value.ToString().Replace('.',',');
-                var imc = value.ToString();
-
                 var vlr = double.Parse(value.ToString(), CultureInfo.CurrentUICulture);
                 if (vlr < 17)
                 {
-                    result = imc + " - Muito abaixo do Peso";
+                    result = (language =="pt-BT" ? " - Muito abaixo do Peso" : " - Very Underweight");
                 }
                 else if (vlr >= 17 && vlr <= 18.49)
                 {
-                    result = imc + " - Abaixo do Peso";
+                    result = (language == "pt-BT" ? " - Abaixo do Peso" : " - Under Weight");
                 }
                 else if (vlr >= 18.5 && vlr <= 24.99)
                 {
-                    result = imc + " - Peso Normal";
+                    result = (language == "pt-BT" ? " - Peso Normal" : " - Normal Weight");
                 }
                 else if (vlr >= 25 && vlr <= 29.99)
                 {
-                    result = imc + " - Acima do Peso";
+                    result = (language == "pt-BT" ? " - Acima do Peso" : " - Overweight");
                 }
                 else if (vlr >= 30 && vlr <= 34.99)
                 {
-                    result = imc + " - Obesidade Moderada";
+                    result = (language == "pt-BT" ? " - Obesidade Moderada" : " - Moderate Obesity");
                 }
                 else if (vlr >= 35 && vlr <= 39.99)
                 {
-                    result = imc + " - Obesidade Severa";
+                    result = (language == "pt-BT" ? " - Obesidade Severa" : " - Severe Obesity");
                 }
                 else if (vlr >= 40)
                 {
-                    result = imc + " - Obesidade Morbida";
+                    result = (language == "pt-BT" ? " - Obesidade Morbida": " - Morbid Obesity");
                 }
             }
 
-            return "IMC: " + result;
+            return (language == "pt-BT" ? "IMC: " : "BMI: ") + imc + result;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

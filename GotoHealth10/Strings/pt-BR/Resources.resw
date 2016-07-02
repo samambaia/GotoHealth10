@@ -138,7 +138,7 @@
     <comment>MainPage.xaml</comment>
   </data>
   <data name="BestWeight_TextBlock.Text" xml:space="preserve">
-    <value>Melhor Peso:</value>
+    <value>Melhor Peso:  </value>
     <comment>MainPage.xaml</comment>
   </data>
   <data name="Email_TextBox.PlaceholderText" xml:space="preserve">

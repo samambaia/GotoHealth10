@@ -16,8 +16,8 @@ namespace GotoHealth10.Converters
                 return string.Empty;
             }
 
-            string datePtBr = ((DateTime)value).Day.ToString().PadLeft(2, 'O') + "/" + ((DateTime)value).Month.ToString().PadLeft(2, '0');
-            string timePtBr = ((DateTime)value).Hour.ToString().PadLeft(2, 'O') + ":" + ((DateTime)value).Minute.ToString().PadLeft(2, '0');
+            string datePtBr = ((DateTime)value).Day.ToString().PadLeft(2, '0') + "/" + ((DateTime)value).Month.ToString().PadLeft(2, '0');
+            string timePtBr = ((DateTime)value).Hour.ToString().PadLeft(2, '0') + ":" + ((DateTime)value).Minute.ToString().PadLeft(2, '0');
 
             return datePtBr + " " + timePtBr;
         }

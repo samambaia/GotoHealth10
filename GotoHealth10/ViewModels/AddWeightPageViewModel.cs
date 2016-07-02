@@ -109,15 +109,15 @@ namespace GotoHealth10.ViewModels
         /// <summary>
         /// Para incluir uma lista - teste
         /// </summary>
-        public void AddWeight()
-        {
-            dailyRepository.ListAddWeighing();
-        }
-
-        //public async Task AddWeight()
+        //public void AddWeight()
         //{
-        //    await SaveWeight();
+        //    dailyRepository.ListAddWeighing();
         //}
+
+        public async Task AddWeight()
+        {
+            await SaveWeight();
+        }
 
         async Task SaveWeight()
         {
