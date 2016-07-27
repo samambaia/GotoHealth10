@@ -37,6 +37,14 @@ namespace GotoHealth10.ViewModels
             set { Set(ref _BestWeight, value); }
         }
 
+        private double _WorstWeight;
+
+        public double WorstWeight
+        {
+            get { return _WorstWeight; }
+            set { Set(ref _WorstWeight, value); }
+        }
+
         #endregion
 
         #region Weight Properties
@@ -118,8 +126,10 @@ namespace GotoHealth10.ViewModels
             var lastCheck = await dailyRepository.LastCheckAsync();
 
             // Check the best Weight
-
             BestWeight = await dailyRepository.BestWeightAsync();
+
+            // Check the worst Weight
+            WorstWeight = await dailyRepository.WorstWeightAsync();
 
             // Check if a user exists
             var existUser = userRepository.FindUser();

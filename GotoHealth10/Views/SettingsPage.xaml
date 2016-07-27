@@ -70,14 +70,14 @@
                               VerticalScrollBarVisibility="Auto">
                     <RelativePanel HorizontalAlignment="Left">
 
-                        <ToggleSwitch x:Name="UseShellDrawnBackButtonToggleSwtich"
+                        <!--<ToggleSwitch x:Name="UseShellDrawnBackButtonToggleSwtich"
                                       x:Uid="UseShellDrawnBackButtonToggleSwtich"
                                       Header=""
                                       IsOn="{Binding UseShellBackButton, Mode=TwoWay}"
                                       OffContent=""
                                       OnContent=""
                                       RelativePanel.AlignLeftWithPanel="True"
-                                      RelativePanel.AlignTopWithPanel="True" />
+                                      RelativePanel.AlignTopWithPanel="True" />-->
 
                         <ToggleSwitch x:Name="UseLightThemeToggleSwitch" 
                                       x:Uid="UseLightThemeToggleSwitch"

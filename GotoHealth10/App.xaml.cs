@@ -85,7 +85,6 @@ namespace GotoHealth10
                 }
                 else
                 {
-
                     NavigationService.Navigate(typeof(Views.MainPage));
                 }
             }

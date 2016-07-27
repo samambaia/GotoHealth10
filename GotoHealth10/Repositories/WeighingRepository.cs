@@ -203,6 +203,15 @@ namespace GotoHealth10.Repositories
             }
         }
 
+        public async Task<double> WorstWeightAsync()
+        {
+            using (var db = new Context())
+            {
+                var worstCheck = await Task.Factory.StartNew(() => db.Weighing.Max(s => s.Weight));
+                return worstCheck;
+            }
+        }
+
         /// <summary>
         /// Usado para dar uma carga inicial no APP com os último 10 dias de marcação.
         /// </summary>
