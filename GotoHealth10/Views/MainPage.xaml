@@ -24,6 +24,8 @@
         <Converters:LikeDislikeConverter x:Key="LikeDislikeConverter"/>
         <Converters:WeightConverter x:Key="WeightConverter"/>
         <Converters:IMCConverter x:Key="IMCConverter"/>
+        <Converters:BestWeightConverter x:Key="BestWeightConverter"/>
+        <Converters:WorseWeightConverter x:Key="WorseWeightConverter"/>
     </Page.Resources>
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -149,28 +151,28 @@
 
                     <StackPanel Grid.Column="0" Grid.Row="1"
                                 Orientation="Horizontal" 
-                                Margin="0,0,0,20" 
+                                Margin="05,0,0,20" 
                                 VerticalAlignment="Bottom" 
                                 HorizontalAlignment="Center">
-                        <TextBlock
+                        <!--<TextBlock
                             x:Uid="BestWeight_TextBlock"
                             Text=""
                             FontFamily="Yu Gothic"
-                            FontSize="14"/>
+                            FontSize="14"/>-->
                         <TextBlock
-                            Text="{Binding BestWeight, Mode=OneWay}"
+                            Text="{Binding BestWeight, Converter={StaticResource BestWeightConverter}}"
                             FontFamily="Yu Gothic"
-                            FontSize="14" Margin="0,0,0,0"/>
+                            FontSize="16" Margin="0,0"/>
                         <TextBlock
-                            x:Uid="WorstWeight_TextBlock"
-                            Text=""
+                            Text="-"
                             FontFamily="Yu Gothic"
-                            FontSize="14"/>
+                            FontSize="16"
+                            Margin="10,0"/>
                         <TextBlock
-                            Text="{Binding WorstWeight, Mode=OneWay}"
+                            Text="{Binding WorstWeight, Converter={StaticResource WorseWeightConverter}}"
                             FontFamily="Yu Gothic"
-                            FontSize="14" Margin="0,0,0,0"/>
-
+                            FontSize="16" Margin="0,0" 
+                            HorizontalAlignment="Right"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Grid.Row="0"

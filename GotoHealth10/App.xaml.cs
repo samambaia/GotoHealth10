@@ -1,6 +1,7 @@
 using GotoHealth10.Models;
 using GotoHealth10.Repositories;
 using GotoHealth10.Services.SettingsServices;
+using Microsoft.HockeyApp;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;

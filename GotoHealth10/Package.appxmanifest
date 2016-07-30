@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="33482Weft.GotoHealth10" Publisher="CN=3CB5D7C8-0128-47A0-BDCA-E11CED3BD9CD" Version="1.1.11.0" />
+  <Identity Name="GotoHealth" Publisher="CN=3CB5D7C8-0128-47A0-BDCA-E11CED3BD9CD" Version="1.1.11.0" />
   <mp:PhoneIdentity PhoneProductId="b2ea8efe-2c57-4a23-989f-725d00c1ea21" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>GotoHealth10</DisplayName>
+    <DisplayName>GotoHealth</DisplayName>
     <PublisherDisplayName>2JK TI</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Mobile" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
   </Dependencies>
   <Resources>
     <Resource Language="x-generate" />

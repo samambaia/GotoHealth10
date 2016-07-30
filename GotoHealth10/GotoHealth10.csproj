@@ -96,11 +96,6 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="GotoHealth10_StoreKey.pfx" />
-    <None Include="GotoHealth10_TemporaryKey.pfx" />
     <None Include="project.json" />
     <PRIResource Include="Strings\pt-BR\Resources.resw" />
     <PRIResource Include="Strings\en-US\Resources.resw" />
@@ -115,6 +110,8 @@
     <Compile Include="Controls\NumPickerControl.xaml.cs">
       <DependentUpon>NumPickerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\WorseWeightConverter.cs" />
+    <Compile Include="Converters\BestWeightConverter.cs" />
     <Compile Include="Converters\DateTimePtBrConverter.cs" />
     <Compile Include="Converters\DatePtBrConverter.cs" />
     <Compile Include="Converters\IMCConverter.cs" />
